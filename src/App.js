@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Chat from './components/Chat';
@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/Theme/Theme';
+import db from './firebase';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -19,6 +20,22 @@ function App() {
     }
   };
 
+  const [rooms, setRooms] = useState([]);
+
+  const getChannels = () => {
+    db.collection('rooms').onSnapshot((snapshot) => {
+      setRooms(
+        snapshot.docs.map((doc) => {
+          return { id: doc.id, name: doc.data().name };
+        })
+      );
+    });
+  };
+
+  useEffect(() => {
+    getChannels();
+  }, []);
+
   return (
     <div className='App'>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -26,7 +43,7 @@ function App() {
           <Container>
             <Header runClick={toggleTheme} />
             <Main>
-              <Sidebar />
+              <Sidebar rooms={rooms} />
               <Switch>
                 <Route path='/room'>
                   <Chat />
