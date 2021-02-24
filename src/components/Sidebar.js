@@ -4,8 +4,19 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { sidebarItemsData } from '../data/SidebarData';
 import { sidebarChannel } from '../data/SidebarData';
 import { sidebarChannelItem } from '../data/SidebarData';
+import AddIcon from '@material-ui/icons/Add';
+import db from '../firebase';
 
 function Sidebar(props) {
+  const addChannel = () => {
+    const promptName = prompt('Enter channel name');
+    if (promptName) {
+      db.collection('rooms').add({
+        name: promptName,
+      });
+    }
+  };
+
   return (
     <Container>
       <WorkspaceContainer>
@@ -23,12 +34,10 @@ function Sidebar(props) {
         ))}
       </MainChannels>
       <ChannelsContainer>
-        {sidebarChannel.map((item) => (
-          <NewChannelContainer>
-            {item.text}
-            {item.icon}
-          </NewChannelContainer>
-        ))}
+        <NewChannelContainer>
+          <div>Channels</div>
+          <AddIcon className='plus-icon' onClick={addChannel} />
+        </NewChannelContainer>
         <ChannelsList>
           {props.rooms.map((item) => (
             <Channel># {item.name}</Channel>
@@ -104,6 +113,10 @@ const NewChannelContainer = styled.div`
   height: 28px;
   padding-left: 19px;
   padding-right: 12px;
+
+  .plus-icon {
+    cursor: pointer;
+  }
 `;
 
 const ChannelsList = styled.div``;

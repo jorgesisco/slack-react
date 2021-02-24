@@ -1,48 +1,53 @@
 import styled from 'styled-components';
 import React from 'react';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import InfoIcon from '@material-ui/icons/Info';
+import InfoOutlinedIcon from '@material-ui/icons/Info';
+import ChatInput from './ChatInput';
 
 function Chat() {
   return (
-    <ChatContainer>
-      <ChatHeader>
-        <ChatInfo>
-          <ChatTitle>
-            <p>#Channel 1</p>
+    <Container>
+      <Header>
+        <Channel>
+          <ChannelName>
+            # Channel 1
             <StarBorderIcon className='icon' />
-          </ChatTitle>
-          <ChatDeails>Company wide annoncements</ChatDeails>
-        </ChatInfo>
-        <Details>
-          <p>Details</p>
-          <InfoIcon className='icon2' />.
-        </Details>
-      </ChatHeader>
-    </ChatContainer>
+          </ChannelName>
+          <ChatInfo>Company wide annoncements</ChatInfo>
+        </Channel>
+        <ChannelDetails>
+          <div>Details</div>
+          <Info />
+        </ChannelDetails>
+      </Header>
+      <MessageContainer></MessageContainer>
+      <ChatInput />
+    </Container>
   );
 }
 
 export default Chat;
 
-const ChatContainer = styled.div`
+const Container = styled.div`
   background: ${({ theme }) => theme.chat};
   color: ${({ theme }) => theme.text_chat};
+  display: grid;
+  grid-template-rows: 64px auto min-content;
 `;
 
-const ChatHeader = styled.div`
-  padding: 10px 10px;
+const Header = styled.div`
+  padding: 10px 20px;
   border-bottom: 1px solid #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px solid rgba(83, 39, 83, 0.13);
 `;
 
-const ChatInfo = styled.div``;
+const Channel = styled.div``;
 
-const ChatTitle = styled.div`
+const ChannelName = styled.div`
+  font-weight: 700;
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -54,18 +59,26 @@ const ChatTitle = styled.div`
   }
 `;
 
-const ChatDeails = styled.div`
-  color: gray;
-  margin-top: 10px;
+const ChatInfo = styled.div`
+  font-weight: 400;
+  margin-top: 8px;
   font-size: 14px;
-  color: ${({ theme }) => theme.text_chat};
+  font-size: 13px;
+  color: ${({ theme }) => theme.chatinfotext};
 `;
 
-const Details = styled.div`
+const ChannelDetails = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #606060;
   .icon2 {
     padding-left: 5px;
   }
+`;
+
+const MessageContainer = styled.div``;
+
+const Info = styled(InfoOutlinedIcon)`
+  margin-left: 10px;
 `;

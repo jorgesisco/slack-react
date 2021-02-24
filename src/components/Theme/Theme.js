@@ -10,6 +10,7 @@ export const lightTheme = {
   shadow: '1px solid #532753',
   shadow_header: '0 1px 0 0 rgb(255 255 255 / 10%)',
   shadow_search_input: 'inset 0 0 0 1px rgb(104 74 104)',
+  chatinfotext: '#606060',
 };
 
 export const darkTheme = {
