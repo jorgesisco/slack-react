@@ -3,7 +3,7 @@ import React from 'react';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import InfoOutlinedIcon from '@material-ui/icons/Info';
 import ChatInput from './ChatInput';
-
+import ChatMessage from './ChatMessage';
 function Chat() {
   return (
     <Container>
@@ -20,7 +20,9 @@ function Chat() {
           <Info />
         </ChannelDetails>
       </Header>
-      <MessageContainer></MessageContainer>
+      <MessageContainer>
+        <ChatMessage />
+      </MessageContainer>
       <ChatInput />
     </Container>
   );
