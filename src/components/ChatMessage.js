@@ -24,6 +24,9 @@ const Container = styled.div`
   padding: 8px 20px;
   display: flex;
   align-items: center;
+  :hover {
+    background: ${({ theme }) => theme.hover_color_message};
+  }
 `;
 
 const UserAvatar = styled.div`

@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import SendIcon from '@material-ui/icons/Send';
+
 function ChatInput() {
+  const changeButtonColor = () => {
+    if (document.getElementById('input_msg').value === '') {
+      document.getElementById('send-button').style.background = 'white';
+    } else {
+      document.getElementById('send-button').style.background = '#35785C';
+    }
+  };
+
   return (
     <Container>
       <InputContainer>
         <form>
-          <input type='text' placeholder='Message Here...'></input>
-          <SendButton>
+          <input
+            onKeyUp={changeButtonColor}
+            id='input_msg'
+            type='text'
+            placeholder='Message Here...'
+          ></input>
+          <SendButton id='send-button'>
             <Send />
           </SendButton>
         </form>
@@ -35,7 +49,7 @@ const InputContainer = styled.div`
     padding-left: 10px;
     input {
       flex: 1;
-
+      background: ${({ theme }) => theme.input_background};
       border: none;
       font-size: 13px;
     }
@@ -47,7 +61,6 @@ const InputContainer = styled.div`
 `;
 
 const SendButton = styled.div`
-  background: #007a5a;
   border-radius: 2px;
   width: 32px;
   height: 32px;
@@ -56,6 +69,7 @@ const SendButton = styled.div`
   justify-content: center;
   margin-right: 5px;
   cursor: pointer;
+  background: white;
 
   .MuiSvgIcon-root {
     width: 18px;

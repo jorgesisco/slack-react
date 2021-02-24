@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { sidebarItemsData } from '../data/SidebarData';
-import { sidebarChannel } from '../data/SidebarData';
-import { sidebarChannelItem } from '../data/SidebarData';
+
 import AddIcon from '@material-ui/icons/Add';
 import db from '../firebase';
 
