@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpIcon from '@material-ui/icons/Help';
-// import { ThemeProvider } from 'styled-components';
-// import { lightTheme, darkTheme } from './Theme/Theme';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-function Header() {
+function Header({ runClick }) {
   return (
     <Container>
       <Main>
@@ -16,6 +15,7 @@ function Header() {
           </Search>
         </SearchContainer>
         <HelpIcon />
+        <Brightness4Icon onClick={runClick} />
       </Main>
       <UserContainer>
         <Name>Jorge Sisco</Name>

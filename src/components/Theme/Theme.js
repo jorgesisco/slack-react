@@ -17,7 +17,7 @@ export const darkTheme = {
   sidebar: 'rgb(25,23,28)',
   text_sidebar_header: 'rgb(209,210,211)',
   text_chat: 'rgb(209,210,211)',
-  chat: 'rgb(26,29,33)',
+  chat: '#1A1D21',
   hover_color: '#350d36',
   toggleBorder: '#6B8096',
   gradient: 'linear-gradient(#39598A, #79D7ED)',

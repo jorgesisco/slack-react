@@ -10,12 +10,21 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/Theme/Theme';
 
 function App() {
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+
   return (
     <div className='App'>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <Router>
           <Container>
-            <Header />
+            <Header runClick={toggleTheme} />
             <Main>
               <Sidebar />
               <Switch>
