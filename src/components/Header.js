@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpIcon from '@material-ui/icons/Help';
+// import { ThemeProvider } from 'styled-components';
+// import { lightTheme, darkTheme } from './Theme/Theme';
 
 function Header() {
   return (
@@ -28,13 +30,13 @@ function Header() {
 export default Header;
 
 const Container = styled.div`
-  background: #350d36;
-  color: white;
+  background: ${({ theme }) => theme.header};
+  color: ${({ theme }) => theme.text_sidebar_header};
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: 0 1px 0 0 rgb(255 255 255 / 10%);
+  box-shadow: ${({ theme }) => theme.shadow_header};
 `;
 
 const Main = styled.div`
@@ -58,7 +60,7 @@ const SearchContainer = styled.div`
 `;
 
 const Search = styled.div`
-  box-shadow: inset 0 0 0 1px rgb(104 74 104);
+  box-shadow: ${({ theme }) => theme.shadow_search_input};
   width: 100%;
   border-radius: 6px;
   display: flex;

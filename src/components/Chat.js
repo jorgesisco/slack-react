@@ -5,23 +5,30 @@ import InfoIcon from '@material-ui/icons/Info';
 
 function Chat() {
   return (
-    <ChatHeader>
-      <ChatInfo>
-        <ChatTitle>
-          <p>#Channel 1</p>
-          <StarBorderIcon className='icon' />
-        </ChatTitle>
-        <ChatDeails>Company wide annoncements</ChatDeails>
-      </ChatInfo>
-      <Details>
-        <p>Details</p>
-        <InfoIcon className='icon2' />.
-      </Details>
-    </ChatHeader>
+    <ChatContainer>
+      <ChatHeader>
+        <ChatInfo>
+          <ChatTitle>
+            <p>#Channel 1</p>
+            <StarBorderIcon className='icon' />
+          </ChatTitle>
+          <ChatDeails>Company wide annoncements</ChatDeails>
+        </ChatInfo>
+        <Details>
+          <p>Details</p>
+          <InfoIcon className='icon2' />.
+        </Details>
+      </ChatHeader>
+    </ChatContainer>
   );
 }
 
 export default Chat;
+
+const ChatContainer = styled.div`
+  background: ${({ theme }) => theme.chat};
+  color: ${({ theme }) => theme.text_chat};
+`;
 
 const ChatHeader = styled.div`
   padding: 10px 10px;
@@ -51,6 +58,7 @@ const ChatDeails = styled.div`
   color: gray;
   margin-top: 10px;
   font-size: 14px;
+  color: ${({ theme }) => theme.text_chat};
 `;
 
 const Details = styled.div`

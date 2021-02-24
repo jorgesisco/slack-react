@@ -4,6 +4,9 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { sidebarItemsData } from '../data/SidebarData';
 import { sidebarChannel } from '../data/SidebarData';
 import { sidebarChannelItem } from '../data/SidebarData';
+// import { ThemeProvider } from 'styled-components';
+// import { lightTheme, darkTheme } from './Theme/Theme';
+
 function Sidebar() {
   return (
     <Container>
@@ -33,6 +36,7 @@ function Sidebar() {
             <Channel>{item.text}</Channel>
           ))}
         </ChannelsList>
+        <ThemeButton></ThemeButton>
       </ChannelsContainer>
     </Container>
   );
@@ -40,18 +44,20 @@ function Sidebar() {
 
 export default Sidebar;
 
+const ThemeButton = styled.div``;
+
 const Container = styled.div`
-  background: #3f0e40;
+  background: ${({ theme }) => theme.header};
 `;
 
 const WorkspaceContainer = styled.div`
-  color: white;
+  color: ${({ theme }) => theme.text_sidebar_header};
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-left: 19px;
-  border-bottom: 1px solid #532753;
+  border-bottom: ${({ theme }) => theme.shadow};
 `;
 
 const Name = styled.div``;
@@ -75,7 +81,7 @@ const MainChannels = styled.div`
 `;
 
 const MainChannelItem = styled.div`
-  color: rgb(188, 171, 188);
+  color: ${({ theme }) => theme.text_sidebar_header};
   display: grid;
   grid-template-columns: 15% auto;
   height: 28px;
@@ -84,12 +90,12 @@ const MainChannelItem = styled.div`
   cursor: pointer;
   padding-top: 5px;
   :hover {
-    background: #350d36;
+    background: ${({ theme }) => theme.hover_color};
   }
 `;
 
 const ChannelsContainer = styled.div`
-  color: rgb(188, 171, 188);
+  color: ${({ theme }) => theme.text_sidebar_header};
   margin-top: 10px;
 `;
 
@@ -111,6 +117,6 @@ const Channel = styled.div`
   padding-left: 19px;
   cursor: pointer;
   :hover {
-    background: #350d36;
+    background: ${({ theme }) => theme.hover_color};
   }
 `;
