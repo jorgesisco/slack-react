@@ -8,14 +8,14 @@ function Header({ runClick }) {
   return (
     <Container>
       <Main>
-        <AccessTimeIcon />
+        <AccessTimeIcon className='timeicon' />
+        <Brightness4Icon className='ThemeColorButton' onClick={runClick} />
         <SearchContainer>
           <Search>
             <input type='text' placeholder='Search...'></input>
           </Search>
         </SearchContainer>
         <HelpIcon />
-        <Brightness4Icon onClick={runClick} />
       </Main>
       <UserContainer>
         <Name>Jorge Sisco</Name>
@@ -43,6 +43,14 @@ const Main = styled.div`
   display: flex;
   margin-left: 16px;
   margin-right: 16px;
+
+  .ThemeColorButton {
+    margin-right: 10px;
+  }
+
+  .timeicon {
+    margin-right: 10px;
+  }
 `;
 
 const UserContainer = styled.div`
