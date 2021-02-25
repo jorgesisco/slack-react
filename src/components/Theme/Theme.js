@@ -13,6 +13,7 @@ export const lightTheme = {
   shadow_search_input: 'inset 0 0 0 1px rgb(104 74 104)',
   chatinfotext: '#606060',
   input_background: 'rgb(255,255,255)',
+  send_button_color: '#35785C',
 };
 
 export const darkTheme = {
