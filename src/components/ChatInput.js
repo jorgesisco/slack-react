@@ -111,6 +111,8 @@ const SendButton = styled.div`
 
   .MuiSvgIcon-root {
     width: 18px;
+    display: flex;
+    padding-left: 10px;
   }
 
   :hover {
