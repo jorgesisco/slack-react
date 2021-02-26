@@ -9,9 +9,13 @@ import Sidebar from './components/Sidebar';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './components/Theme/Theme';
 import db from './firebase';
+import { auth, provider } from './firebase';
 
 function App() {
   const [theme, setTheme] = useState('light');
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
   const toggleTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
@@ -32,6 +36,13 @@ function App() {
     });
   };
 
+  const signOut = () => {
+    auth.signOut().then(() => {
+      localStorage.removeItem('user');
+      setUser(null);
+    });
+  };
+
   useEffect(() => {
     getChannels();
   }, []);
@@ -40,20 +51,23 @@ function App() {
     <div className='App'>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <Router>
-          <Container>
-            <Header runClick={toggleTheme} />
-            <Main>
-              <Sidebar rooms={rooms} />
-              <Switch>
-                <Route path='/room'>
-                  <Chat />
-                </Route>
-                <Route path='/'>
-                  <Login />
-                </Route>
-              </Switch>
-            </Main>
-          </Container>
+          {/* If there is no user (!user) here show login page in case there is user it will show the rest! */}
+          {!user ? (
+            <Login setUser={setUser} />
+          ) : (
+            <Container>
+              <Header signOut={signOut} user={user} runClick={toggleTheme} />
+              <Main>
+                <Sidebar rooms={rooms} />
+                <Switch>
+                  <Route path='/room/:channelId'>
+                    <Chat />
+                  </Route>
+                  <Route path='/'>Select or Create Channel</Route>
+                </Switch>
+              </Main>
+            </Container>
+          )}
         </Router>
       </ThemeProvider>
     </div>

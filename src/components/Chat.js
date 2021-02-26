@@ -1,16 +1,49 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import InfoOutlinedIcon from '@material-ui/icons/Info';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
+import db from '../firebase';
+import { useParams } from 'react-router-dom';
+
 function Chat() {
+  let { channelId } = useParams();
+
+  const [channel, setChannel] = useState();
+  const [messages, setMessages] = useState([]);
+
+  const getChannel = () => {
+    db.collection('rooms')
+      .doc(channelId)
+      .onSnapshot((snapshot) => {
+        setChannel(snapshot.data());
+      });
+    // console.log(channel.name);
+  };
+
+  const getMessages = () => {
+    db.collection('rooms')
+      .doc(channelId)
+      .collection('messages')
+      .orderBy('timestamp', 'asc')
+      .onSnapshot((snapshot) => {
+        let messages = snapshot.docs.map((doc) => doc.data());
+        setMessages(messages);
+      });
+  };
+
+  useEffect(() => {
+    getChannel();
+    getMessages();
+  }, [channelId]);
+
   return (
     <Container>
       <Header>
         <Channel>
           <ChannelName>
-            # Channel 1
+            # {channel && channel.name}
             <StarBorderIcon className='icon' />
           </ChannelName>
           <ChatInfo>Company wide annoncements</ChatInfo>
@@ -21,7 +54,15 @@ function Chat() {
         </ChannelDetails>
       </Header>
       <MessageContainer>
-        <ChatMessage />
+        {messages.length > 0 &&
+          messages.map((data, index) => (
+            <ChatMessage
+              text={data.text}
+              name={data.user}
+              image={data.userImage}
+              timestamp={data.timestamp}
+            />
+          ))}
       </MessageContainer>
       <ChatInput />
     </Container>

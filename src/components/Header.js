@@ -4,7 +4,7 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import HelpIcon from '@material-ui/icons/Help';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-function Header({ runClick }) {
+function Header({ user, runClick, signOut }) {
   return (
     <Container>
       <Main>
@@ -18,9 +18,11 @@ function Header({ runClick }) {
         <HelpIcon />
       </Main>
       <UserContainer>
-        <Name>Jorge Sisco</Name>
-        <UserImage>
-          <img src='https://i.imgur.com/6VBx3io.png'></img>
+        <Name>{user.name}</Name>
+        <UserImage onClick={signOut}>
+          <img
+            src={user.photo ? user.photo : 'https://i.imgur.com/6VBx3io.png'}
+          />
         </UserImage>
       </UserContainer>
     </Container>
@@ -92,6 +94,10 @@ const Search = styled.div`
 
 const Name = styled.div`
   padding-right: 16px;
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 `;
 
 const UserImage = styled.div`
@@ -99,6 +105,7 @@ const UserImage = styled.div`
   height: 28px;
   border: 2px solid white;
   border-radius: 3px;
+  cursor: pointer;
 
   img {
     width: 100%;
