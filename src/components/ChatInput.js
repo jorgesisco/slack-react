@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SendIcon from '@material-ui/icons/Send';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
@@ -16,7 +16,16 @@ import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
-function ChatInput() {
+function ChatInput({ sendMessage }) {
+  const [input, setInput] = useState('');
+
+  const send = (e) => {
+    e.preventDefault();
+    if (!input) return;
+    sendMessage(input);
+    setInput('');
+  };
+
   const changeButtonColor = () => {
     if (document.getElementById('input_msg').value === '') {
       document.getElementById('send-button').style.background = '';
@@ -30,8 +39,10 @@ function ChatInput() {
       <InputContainer>
         <form>
           <input
+            onChange={(e) => setInput(e.target.value)}
             onKeyUp={changeButtonColor}
             id='input_msg'
+            value={input}
             type='text'
             placeholder='Message Here...'
           ></input>
@@ -55,7 +66,7 @@ function ChatInput() {
             <AlternateEmailIcon />
             <EmojiEmotionsIcon />
             <AttachFileIcon />
-            <SendButton id='send-button'>
+            <SendButton type='submit' onClick={send} id='send-button'>
               <Send />
             </SendButton>
           </Right_container>
@@ -99,7 +110,7 @@ const InputContainer = styled.div`
   }
 `;
 
-const SendButton = styled.div`
+const SendButton = styled.button`
   border-radius: 2px;
   width: 32px;
   height: 32px;
@@ -108,8 +119,7 @@ const SendButton = styled.div`
   justify-content: center;
   margin-right: 10px;
   cursor: pointer;
-
-  .MuiSvgIcon-root {
+  border: none;
     width: 18px;
     display: flex;
     padding-left: 10px;
